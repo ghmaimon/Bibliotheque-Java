@@ -27,6 +27,7 @@ public class Magazine extends Document {
     public void set_jour_edition(int jour_edition) {
         this.jourEdition = jour_edition;
     }
+    
     // ************** methods:
 
     public String toString() {
@@ -48,5 +49,6 @@ public class Magazine extends Document {
         this.periodicity = periodicity;
         this.moisEdition = mois_edition;
         this.jourEdition = jour_edition;
+        type = "Magazine";
     }
 }

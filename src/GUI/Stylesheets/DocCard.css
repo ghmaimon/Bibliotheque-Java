@@ -1,3 +1,63 @@
-.root{
-    -fx-background-color: red;
+.doc_card_image{
+    -fx-min-height : 150;
+    -fx-max-height : 150;
+    -fx-min-width : 180;
+    -fx-max-width : 180;
+    -fx-padding: 7;
+    -fx-border-insets: 2px;
+    -fx-background-insets: 2px;
+    -fx-background-radius: 10px;
+    -fx-background-image: url(../Images/book.png);
+    -fx-background-size: 100%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+.doc_card_titre{
+    -fx-font-size:50;
+    -fx-font-weight: 900;
+    -fx-min-height : 40;
+    -fx-max-height : 150;
+    -fx-padding: 2;
+    -fx-text-fill: blue;
+}
+.detail{
+    -fx-font-size:20;
+    -fx-font-weight: 500;
+    -fx-min-height : 20;
+    -fx-max-height : 150;
+    -fx-padding: 2;
+}
+.btn_card{
+    -fx-min-height : 50;
+    -fx-max-height : 50;
+    -fx-min-width : 100;
+    -fx-max-width : 100;
+    -fx-padding: 7;
+    -fx-border-insets: 2px;
+    -fx-background-insets: 2px;
+    -fx-background-radius: 4px;
+    -fx-font-size:14px;
+    -fx-font-weight: bold;
+    -fx-text-alignment:center;
+    -fx-background-color : rgb(195, 219, 233);
+}
+.btn_card:hover{
+    -fx-background-color : rgb(175, 216, 240);
+    -fx-border-color: rgb(98, 153, 236) ;
+    -fx-border-width: 2 ; 
+    -fx-border-style: solid ;
+    -fx-border-radius : 4px;
+}
+.btn_card:pressed{
+    -fx-background-color : rgb(138, 201, 238);
+    -fx-border-color: rgb(111, 160, 235) ;
+    -fx-border-width: 2 ; 
+    -fx-border-style: solid ;
+    -fx-border-radius : 10px;
+}
+.centerLayout{
+    background-image: url(../Images/f.jpg);
+    -fx-background-size: 100%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
 }

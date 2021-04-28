@@ -50,5 +50,6 @@ public class Livre extends Document {
         this.type = type;
         this.numPages = num_pages;
         this.tome = tome;
+        type = "Livre";
     }
 }

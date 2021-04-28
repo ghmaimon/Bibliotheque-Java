@@ -11,6 +11,7 @@ public abstract class Document {
     private String editeur;
     private String AneEdition;
     private int numExemplaires;
+    protected String type;
 
     private final int numEnregistrement;
 
@@ -70,7 +71,9 @@ public abstract class Document {
     public int get_num_enregistrement() {
         return this.numEnregistrement;
     }
-
+    public String get_type(){
+        return type;
+    }
     // ************** methods:
 
     public String toString(){

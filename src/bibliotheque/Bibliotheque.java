@@ -52,7 +52,9 @@ public class Bibliotheque {
     }
 
     // methods:
-
+    public List<Document> getAllDocs(){
+        return this.listDocuments;
+    }
     public List<Document> getDocumentByEditeur(String editeur) {
         List<Document> results = new ArrayList<Document>();
         for(int i = 0; i < this.listDocuments.size(); i++) {

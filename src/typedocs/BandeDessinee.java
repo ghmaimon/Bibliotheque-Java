@@ -19,7 +19,7 @@ public class BandeDessinee extends Document{
         public void set_genre(String genre) {
             this.genre = genre;
         }
-    
+
         // ************** methods:
     
         public String toString() {
@@ -35,5 +35,7 @@ public class BandeDessinee extends Document{
             super(ISBN, titre, auteurs, editeur, AneEdition, numExemplaires);
             this.coloree = colore;
             this.genre = genre;
+            type = "Bande Dessinée";
         }
+
 }
