@@ -1,6 +1,8 @@
 package typeperson;
 import java.time.LocalDate;
 
+import typedocs.Document;
+
 
 public class Professeur extends Person {
     // ************ attributes:
@@ -20,11 +22,22 @@ public class Professeur extends Person {
     public void set_grade(int grade) {
         this.grade = grade;
     }
+
+
+    public String toString(){
+        String results = super.toString();
+        results += "\nCours : " + cours;
+        results += "\nGrade : " + Integer.toString(grade);
+
+        return results;
+    }
     // ************ constructeur:
     public Professeur(String nom, String prenom,int age,String email, String cin,String numTelefone,String address, LocalDate naissance, String cours, int grade){
         super(nom, prenom, age, email, cin, numTelefone, address, naissance);
         this.numEmpruntsMax = 5;
         this.grade = grade;
         this.cours = cours;
+        type = "professeur";
+        empruntes = new Document[numEmpruntsMax];
     }
 }

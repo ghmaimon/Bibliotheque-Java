@@ -2,11 +2,12 @@ package typeperson;
 
 import java.time.LocalDate;
 
+import typedocs.Document;
+
 public abstract class Person {
 
     // ************ attributes:
 
-    private final int id;
     private String nom;
     private String prenom;
     private int age;
@@ -16,26 +17,30 @@ public abstract class Person {
     private String numTelefone;
     private String email;
     protected int numEmpruntsMax;
+    protected String type;
+    public Document[] empruntes;
+    private int numEmprunts;
+
 
     protected static int id_counter = 0;
 
     // ************ getters et setters:
 
-    public static int get_id_counter() {
-        return id_counter;
-    }
-    public static void inc_id_counter() {
-        id_counter +=1 ;
+    public String get_type(){
+        return type;
     }
 
-    public int get_id() {
-        return id;
-    }
     public String get_nom() {
         return nom;
     }
     public void set_nom(String nom) {
         this.nom = nom;
+    }
+    public int get_numEmprunts() {
+        return numEmprunts;
+    }
+    public void set_numEmprunts(int numEmprunts) {
+        this.numEmprunts = numEmprunts;
     }
     public String get_prenom() {
         return prenom;
@@ -79,15 +84,25 @@ public abstract class Person {
     public void set_email(String email){
         this.email = email;
     }
+    public int get_numEmpruntsMax(){
+        return numEmpruntsMax;
+    }
+
+    public String toString(){
+        String results = "";
+        results += "Nom : " + nom;
+        results += "\nPrenom:" + prenom;
+        results += "\nAge : " + Integer.toString(age);
+        results += "\nAddress : " + address;
+        results += "\nNaissance : " + naissance;
+        results += "\nnuméro de telefon : " + numTelefone;
+        results += "\nEmail : " + email;
+        return results;
+    }
 
     // ************** constructeur:
 
     public Person(String nom, String prenom,int age,String email, String cin,String numTelefone,String address, LocalDate naissance) {
-
-        id = get_id_counter();
-        inc_id_counter();
-
-        this.numEmpruntsMax = 1;
 
         this.nom = nom;
         this.prenom = prenom;
@@ -97,5 +112,6 @@ public abstract class Person {
         this.naissance = naissance;
         this.address = address;
         this.numTelefone = numTelefone;
+        numEmprunts = 0;
     }
 }

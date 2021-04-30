@@ -55,6 +55,9 @@ public class Bibliotheque {
     public List<Document> getAllDocs(){
         return this.listDocuments;
     }
+    public List<Person> getAllPersons(){
+        return this.listEmprunteurs;
+    }
     public List<Document> getDocumentByEditeur(String editeur) {
         List<Document> results = new ArrayList<Document>();
         for(int i = 0; i < this.listDocuments.size(); i++) {
@@ -64,9 +67,9 @@ public class Bibliotheque {
         }
         return results;
     }
-    public Document getDocumentByISBM(int isbm) throws ElementNotFoundException{
+    public Document getDocumentByISBM(String isbm) throws ElementNotFoundException{
         for(int i = 0; i < this.listDocuments.size(); i++) {
-            if(this.listDocuments.get(i).get_ISBN() == isbm){
+            if(this.listDocuments.get(i).get_ISBN().equals(isbm)){
                 return this.listDocuments.get(i);
             }
         }
@@ -112,9 +115,9 @@ public class Bibliotheque {
         }
         throw new ElementNotFoundException("Professeur");
     }
-    public void supprimerDocument(String titre) throws ElementNotFoundException{
-        ArrayList<Document> to_remove = (ArrayList<Document>)getDocumentByTitre(titre);
-        if(!listDocuments.removeAll(to_remove)) throw new ElementNotFoundException("Document");
+    public void supprimerDocument(String isbm) throws ElementNotFoundException{
+        Document to_remove = getDocumentByISBM(isbm);
+        if(!listDocuments.remove(to_remove)) throw new ElementNotFoundException("Document");
     }
     public void supprimerEtudiant(String cne) throws ElementNotFoundException{
         Etudiant E = getEtudiantByCne(cne);

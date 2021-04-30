@@ -56,3 +56,27 @@
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
 }
+#tril{
+    -fx-text-alignment:center;
+    -fx-min-height : 100;
+    -fx-min-width : 100;
+    -fx-border-insets: 2px;
+    -fx-background-insets: 2px;
+    -fx-background-radius: 4px;
+    -fx-font-size:15;
+    -fx-font-weight: bold;
+    -fx-text-fill: rgb(166, 166, 221);
+    -fx-effect: dropshadow(three-pass-box, rgb(117, 117, 235), 5, 0, 0, 0);
+}
+#asc{
+    -fx-background-image: url(../Images/up.png);
+    -fx-background-size: 50%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+#desc{
+    -fx-background-image: url(../Images/down.png);
+    -fx-background-size: 50%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}

@@ -1,6 +1,8 @@
 package typeperson;
 import java.time.LocalDate;
 
+import typedocs.Document;
+
 public class Etudiant extends Person{
 
     // ************ attributes:
@@ -8,7 +10,6 @@ public class Etudiant extends Person{
     private String filier;
     private int niveau;
     private boolean boursie;
-
     // ************ getters et setters:
 
     public String get_cne() {
@@ -36,6 +37,14 @@ public class Etudiant extends Person{
         this.boursie = boursie;
     }
 
+    public String toString(){
+        String results = super.toString();
+        results += "\nCNE : " + cne;
+        results += "\nFilier : " + filier;
+        results += "\nNiveau : " + Integer.toString(niveau);
+        results += boursie? "Boursié" : "N'est pas boursié";
+        return results;
+    }
 
     // ************ constructeur:
     public Etudiant(String nom, String prenom,int age,String email, String cin,String numTelefone,String address, LocalDate naissance, String filier, int niveau,boolean boursie,String cne){
@@ -44,5 +53,7 @@ public class Etudiant extends Person{
         this.niveau = niveau;
         this.filier = filier;
         this.boursie = boursie;
+        type = "etudiant";
+        empruntes = new Document[numEmpruntsMax];
     }
 }

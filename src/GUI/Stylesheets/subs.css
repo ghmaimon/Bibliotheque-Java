@@ -1,0 +1,36 @@
+.details{
+    -fx-font-size : 20;
+    -fx-font-weight: bold;
+    -fx-border-radius: 10 15;
+    -fx-border-style:solid;
+    -fx-border-color:rgb(124, 124, 240);
+    -fx-padding : 5;
+}
+.btn{
+    -fx-min-height : 50;
+    -fx-max-height : 50;
+    -fx-min-width : 150;
+    -fx-padding: 15 0 15 0;
+    -fx-font-size:14px;
+    -fx-font-weight: bold;
+    -fx-border-radius : 4px;
+    -fx-background-radius : 4px;
+    -fx-background-color : rgb(195, 219, 233);
+}
+.btn:hover{
+    -fx-background-color : rgb(175, 216, 240);
+    -fx-border-color: rgb(98, 153, 236) ;
+    -fx-border-width: 2 ; 
+    -fx-border-style: solid ;
+    -fx-border-radius : 4px;
+}
+.btn:pressed{
+    -fx-background-color : rgb(138, 201, 238);
+    -fx-border-color: rgb(111, 160, 235) ;
+    -fx-border-width: 2 ; 
+    -fx-border-style: solid ;
+    -fx-border-radius : 4px;
+}
+.root{
+    -fx-content-alignment : center;
+}

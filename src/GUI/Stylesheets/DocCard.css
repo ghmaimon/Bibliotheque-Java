@@ -13,12 +13,12 @@
     -fx-background-position: center;
 }
 .doc_card_titre{
-    -fx-font-size:50;
+    -fx-font-size:25;
     -fx-font-weight: 900;
     -fx-min-height : 40;
     -fx-max-height : 150;
     -fx-padding: 2;
-    -fx-text-fill: blue;
+    -fx-text-fill: rgb(3, 3, 63);
 }
 .detail{
     -fx-font-size:20;
@@ -57,7 +57,26 @@
 }
 .centerLayout{
     background-image: url(../Images/f.jpg);
-    -fx-background-size: 100%;
-    -fx-background-repeat: no-repeat;
-    -fx-background-position: center;
+    -fx-min-height : 600;
+    -fx-max-height : 600;
+    -fx-min-width : 600;
+    -fx-max-width : 1000;
+    -fx-padding: 7;
+    -fx-border-insets: 2px;
+    -fx-background-insets: 2px;
+    -fx-background-radius: 10px;
+    -fx-text-alignment:center;
+    -fx-effect: dropshadow(three-pass-box, rgb(143, 143, 202), 25, 0, 0, 0);
+}
+#gl{
+    -fx-border-insets: 60 0 0 0;
+    -fx-background-insets: 60 0 0 0;
+    -fx-padding: 60 0 0 0 ;
+    
+}
+#dl{
+    -fx-border-insets: 60 0 0 0;
+    -fx-background-insets: 60 0 0 0;
+    -fx-padding: 60 0 0 0 ;
+    -fx-text-alignment:center;
 }

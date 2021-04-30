@@ -6,7 +6,6 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.DatePicker;
@@ -18,29 +17,17 @@ import javafx.scene.layout.VBox;
 
 import typeperson.*;
 
-public class AddPerson {
+public class ChangePerson {
 
-    public static Person obj;
-
-    public static Person display(){
+    public static void display(PersonCard obj){
 
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
-        window.setTitle("Ajouter un Person");
+        window.setTitle("Changer un Person");
         window.setMinWidth(350);
         window.setMinHeight(300);
-        
-
-        ComboBox<String> typeDoc = new ComboBox<String>();
-        typeDoc.getItems().addAll(
-            "Etudiant",
-            "Professeur"
-        );
-        typeDoc.setPromptText("Person...");
-        typeDoc.setOnAction(
-            e -> {
-                switch (typeDoc.getValue()){
-                    case "Etudiant" :{
+                switch (obj.person.get_type()){
+                    case "etudiant" :{
                         Label nomlabel = new Label("Nom :");
                         Label prenomlabel = new Label("Prenom :");
                         Label agelabel = new Label("Age :");
@@ -70,18 +57,19 @@ public class AddPerson {
                         gridEtudiant.add(boursielabel, 0, 11,1,1);
 
                         
-                        TextField nomTextField = new TextField();
-                        TextField prenomTextField = new TextField();
-                        TextField ageTextField = new TextField();
-                        TextField cinTextField = new TextField();
-                        TextField addressTextField = new TextField();
-                        DatePicker naissanceTextField = new DatePicker();
-                        TextField numTelefoneTextField = new TextField();
-                        TextField emailTextField = new TextField();
-                        TextField cneTextField = new TextField();
-                        TextField filierTextField = new TextField();
-                        TextField niveauTextField = new TextField();
+                        TextField nomTextField = new TextField(((Etudiant)obj.person).get_nom());
+                        TextField prenomTextField = new TextField(((Etudiant)obj.person).get_prenom());
+                        TextField ageTextField = new TextField(Integer.toString(((Etudiant)obj.person).get_age()));
+                        TextField cinTextField = new TextField(((Etudiant)obj.person).get_cin());
+                        TextField addressTextField = new TextField(((Etudiant)obj.person).get_address());
+                        DatePicker naissanceTextField = new DatePicker(((Etudiant)obj.person).get_naissance());
+                        TextField numTelefoneTextField = new TextField(((Etudiant)obj.person).get_num_telefone());
+                        TextField emailTextField = new TextField(((Etudiant)obj.person).get_email());
+                        TextField cneTextField = new TextField(((Etudiant)obj.person).get_cne());
+                        TextField filierTextField = new TextField(((Etudiant)obj.person).get_filier());
+                        TextField niveauTextField = new TextField(Integer.toString(((Etudiant)obj.person).get_niveau()));
                         CheckBox boursieTextField = new CheckBox();
+                        if(((Etudiant)obj.person).get_boursie()) boursieTextField.setSelected(true);
 
                         gridEtudiant.add(nomTextField, 1, 0,1,1);
                         gridEtudiant.add(prenomTextField, 1, 1,1,1);
@@ -97,32 +85,30 @@ public class AddPerson {
                         gridEtudiant.add(boursieTextField, 1, 11,1,1);
 
                         VBox mainLayout_Etudiant = new VBox();
-                        Label nameW = new Label("Ajouter un Person");
+                        Label nameW = new Label("Changer un Person");
 
                         mainLayout_Etudiant.setPadding(new Insets(10,10,10,10));
                         gridEtudiant.setVgap(5);
                         gridEtudiant.setHgap(15);
                         mainLayout_Etudiant.setSpacing(20);
 
-
                         HBox buttonsLayout_Etudiant = new HBox();
 
-                        Button Add_Etudiant = new Button("Ajouter");
+                        Button Add_Etudiant = new Button("Changer");
 
                         Add_Etudiant.setOnAction(e1 -> {
-                            String nom = nomTextField.getText();
-                            String prenom= prenomTextField.getText();
-                            int age= Integer.parseInt(ageTextField.getText());
-                            String cin = cinTextField.getText();
-                            String address = addressTextField.getText();;
-                            LocalDate naissance = naissanceTextField.getValue(); 
-                            String numTelefone = numTelefoneTextField.getText();
-                            String email = emailTextField.getText();
-                            String cne = cneTextField.getText();
-                            String filier = filierTextField.getText();
-                            int niveau = Integer.parseInt(niveauTextField.getText());
-                            boolean boursie = boursieTextField.isSelected();
-                            obj = new Etudiant(nom,prenom,age,email,cin,numTelefone,address,naissance,filier,niveau,boursie,cne);
+                            ((Etudiant)obj.person).set_nom(nomTextField.getText());
+                            ((Etudiant)obj.person).set_prenom(prenomTextField.getText());
+                            ((Etudiant)obj.person).set_age(Integer.parseInt(ageTextField.getText()));
+                            ((Etudiant)obj.person).set_cin(cinTextField.getText());
+                            ((Etudiant)obj.person).set_address(addressTextField.getText());
+                            ((Etudiant)obj.person).set_naissance(naissanceTextField.getValue()); 
+                            ((Etudiant)obj.person).set_num_telefone(numTelefoneTextField.getText());
+                            ((Etudiant)obj.person).set_email(emailTextField.getText());
+                            ((Etudiant)obj.person).set_cne(cneTextField.getText());
+                            ((Etudiant)obj.person).set_filier(filierTextField.getText());
+                            ((Etudiant)obj.person).set_niveau(Integer.parseInt(niveauTextField.getText()));
+                            ((Etudiant)obj.person).set_boursie(boursieTextField.isSelected());
                             window.close();
                         });
                         Button Cancel_Etudiant = new Button("Annuler");
@@ -134,14 +120,14 @@ public class AddPerson {
                         buttonsLayout_Etudiant.setSpacing(20);
 
 
-                        mainLayout_Etudiant.getChildren().addAll(nameW,typeDoc,gridEtudiant,buttonsLayout_Etudiant);
+                        mainLayout_Etudiant.getChildren().addAll(nameW,gridEtudiant,buttonsLayout_Etudiant);
 
 
                         Scene scene_etudiant = new Scene(mainLayout_Etudiant);
                         window.setScene(scene_etudiant);
                         break;
                     }
-                    case "Professeur" :{
+                    case "professeur" :{
                         Label nomlabel = new Label("Nom :");
                         Label prenomlabel = new Label("Prenom :");
                         Label agelabel = new Label("Age :");
@@ -167,16 +153,16 @@ public class AddPerson {
                         gridEtudiant.add(Gradelabel, 0, 9,1,1);
 
                         
-                        TextField nomTextField = new TextField();
-                        TextField prenomTextField = new TextField();
-                        TextField ageTextField = new TextField();
-                        TextField cinTextField = new TextField();
-                        TextField addressTextField = new TextField();
-                        DatePicker naissanceTextField = new DatePicker();
-                        TextField numTelefoneTextField = new TextField();
-                        TextField emailTextField = new TextField();
-                        TextField CoursTextField = new TextField();
-                        TextField GradeTextField = new TextField();
+                        TextField nomTextField = new TextField(((Professeur)obj.person).get_nom());
+                        TextField prenomTextField = new TextField(((Professeur)obj.person).get_prenom());
+                        TextField ageTextField = new TextField(Integer.toString(((Professeur)obj.person).get_age()));
+                        TextField cinTextField = new TextField(((Professeur)obj.person).get_cin());
+                        TextField addressTextField = new TextField(((Professeur)obj.person).get_address());
+                        DatePicker naissanceTextField = new DatePicker(((Professeur)obj.person).get_naissance());
+                        TextField numTelefoneTextField = new TextField(((Professeur)obj.person).get_num_telefone());
+                        TextField emailTextField = new TextField(((Professeur)obj.person).get_email());
+                        TextField CoursTextField = new TextField(((Professeur)obj.person).get_cours());
+                        TextField GradeTextField = new TextField(Integer.toString(((Professeur)obj.person).get_grade()));
 
                         gridEtudiant.add(nomTextField, 1, 0,1,1);
                         gridEtudiant.add(prenomTextField, 1, 1,1,1);
@@ -190,7 +176,7 @@ public class AddPerson {
                         gridEtudiant.add(GradeTextField, 1, 9,1,1);
 
                         VBox mainLayout_Etudiant = new VBox();
-                        Label nameW = new Label("Ajouter un Person");
+                        Label nameW = new Label("Changer un Person");
 
                         mainLayout_Etudiant.setPadding(new Insets(10,10,10,10));
                         gridEtudiant.setVgap(5);
@@ -200,20 +186,19 @@ public class AddPerson {
 
                         HBox buttonsLayout_Etudiant = new HBox();
 
-                        Button Add_Etudiant = new Button("Ajouter");
+                        Button Add_Etudiant = new Button("Changer");
 
                         Add_Etudiant.setOnAction(e1 -> {
-                            String nom = nomTextField.getText();
-                            String prenom= prenomTextField.getText();
-                            int age= Integer.parseInt(ageTextField.getText());
-                            String cin = cinTextField.getText();
-                            String address = addressTextField.getText();;
-                            LocalDate naissance = naissanceTextField.getValue(); 
-                            String numTelefone = numTelefoneTextField.getText();
-                            String email = emailTextField.getText();
-                            String cours = CoursTextField.getText();
-                            int grade = Integer.parseInt(GradeTextField.getText());
-                            obj = new Professeur(nom,prenom,age,email,cin,numTelefone,address,naissance,cours,grade);
+                            ((Professeur)obj.person).set_nom(nomTextField.getText());
+                            ((Professeur)obj.person).set_prenom(prenomTextField.getText());
+                            ((Professeur)obj.person).set_age(Integer.parseInt(ageTextField.getText()));
+                            ((Professeur)obj.person).set_cin(cinTextField.getText());
+                            ((Professeur)obj.person).set_address(addressTextField.getText());
+                            ((Professeur)obj.person).set_naissance(naissanceTextField.getValue()); 
+                            ((Professeur)obj.person).set_num_telefone(numTelefoneTextField.getText());
+                            ((Professeur)obj.person).set_email(emailTextField.getText());
+                            ((Professeur)obj.person).set_cours(CoursTextField.getText());
+                            ((Professeur)obj.person).set_grade(Integer.parseInt(GradeTextField.getText()));
                             window.close();
                         });
                         Button Cancel_Etudiant = new Button("Annuler");
@@ -225,7 +210,7 @@ public class AddPerson {
                         buttonsLayout_Etudiant.setSpacing(20);
 
 
-                        mainLayout_Etudiant.getChildren().addAll(nameW,typeDoc,gridEtudiant,buttonsLayout_Etudiant);
+                        mainLayout_Etudiant.getChildren().addAll(nameW,gridEtudiant,buttonsLayout_Etudiant);
 
 
                         Scene scene_etudiant = new Scene(mainLayout_Etudiant);
@@ -236,17 +221,6 @@ public class AddPerson {
 
                     }
                 }
-            }
-        );
-        VBox defl = new VBox();
-        Label nameW = new Label("Ajouter un document");
-        defl.getChildren().addAll(nameW,typeDoc);
-        Scene sel = new Scene(defl);
-        defl.setPadding(new Insets(10,10,10,10));
-
-        window.setScene(sel);
         window.showAndWait();
-
-        return obj;
     }
 }

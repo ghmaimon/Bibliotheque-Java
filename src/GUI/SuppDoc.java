@@ -14,9 +14,9 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class SuppDoc {
-    static String titre;
-    public static String titreASupp(){
-
+    static String ISBM;
+    public static String ISBMASupp(){
+        ISBM = null;
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("Supprimer un document");
@@ -26,12 +26,12 @@ public class SuppDoc {
         HBox layoutForm = new HBox();
         Button supprimer = new Button("Supprimer");
         Button annuler = new Button("Annuler");
-        Label titreLabel = new Label("Titre : ");
-        TextField titreTextField = new TextField();
+        Label ISBMLabel = new Label("ISBN : ");
+        TextField ISBMTextField = new TextField();
         layout.getChildren().addAll(layoutForm,layoutButtons);
         supprimer.setDisable(true);
-        titreTextField.textProperty().addListener (e-> {
-            if(titreTextField.getText().isEmpty()){
+        ISBMTextField.textProperty().addListener (e-> {
+            if(ISBMTextField.getText().isEmpty()){
                 supprimer.setDisable(true);
             }
             else{
@@ -45,7 +45,7 @@ public class SuppDoc {
             supAl.getButtonTypes().setAll(oui,non);
             supAl.setHeaderText("vous êtes sûr ?");
             if(supAl.showAndWait().get() == oui){
-                titre = titreTextField.getText();
+                ISBM = ISBMTextField.getText();
                 window.close();
             }else{
                 window.close();
@@ -55,13 +55,15 @@ public class SuppDoc {
             window.close();
         });
         layoutButtons.getChildren().addAll(supprimer,annuler);
-        layoutForm.getChildren().addAll(titreLabel,titreTextField);
+        layoutForm.getChildren().addAll(ISBMLabel,ISBMTextField);
         
         layout.setPadding(new Insets(10,10,10,10));
         Scene scene = new Scene(layout);
+        layout.setPadding(new Insets(10,10,10,10));
+
         window.setScene(scene);
         window.showAndWait();
 
-        return titre;
+        return ISBM;
     }
 }

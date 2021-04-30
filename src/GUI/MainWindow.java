@@ -5,7 +5,7 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
@@ -45,6 +45,15 @@ public class MainWindow extends Application implements EventHandler<ActionEvent>
     MenuItem supprimerProf;
     MenuItem supprimerEtud;
     SeparatorMenuItem supprimerSepar;
+    Menu ChercherMenu;
+    Menu ChercherDoc;
+    MenuItem ChercherProf;
+    MenuItem ChercherEtud;
+    SeparatorMenuItem ChercherSepar;
+    MenuItem ChercherDocByISBM;
+    MenuItem ChercherDocByTitre;
+    MenuItem ChercherDocByAuteur;
+    MenuItem ChercherDocByEditeur;
     //partie gauch:
     VBox Glayout;
     Button tousDocs;
@@ -57,6 +66,12 @@ public class MainWindow extends Application implements EventHandler<ActionEvent>
     ScrollPane spane;
     TextField cherchField;
     Button chercher;
+
+    //partie gauche:
+    VBox Dlayout;
+    Button tri_asc;
+    Button tri_decs;
+    Label tri_date;
     
 
     public static void main(String[] args) {
@@ -64,7 +79,7 @@ public class MainWindow extends Application implements EventHandler<ActionEvent>
     }
     @Override
     public void start(Stage primaryStage) throws Exception {
-        primaryStage.setTitle("GUI test");
+        primaryStage.setTitle("Bibliotheque");
         primaryStage.setResizable(false);
         mainLayout = new BorderPane();
         // menu :
@@ -76,7 +91,7 @@ public class MainWindow extends Application implements EventHandler<ActionEvent>
         ajouterPerson = new MenuItem("_Personne...");
         ajouterPerson.setOnAction(this);
         ajouterMenu.getItems().addAll(ajouterPerson,ajouterDocument);
-        // menu poura supprimer:
+        // menu pour supprimer:
         supprimerMenu = new Menu("_Supprimer");
         supprimerDocument = new MenuItem("_Document...");
         supprimerDocument.setOnAction(this);
@@ -87,12 +102,26 @@ public class MainWindow extends Application implements EventHandler<ActionEvent>
         supprimerSepar = new SeparatorMenuItem();
         supprimerMenu.getItems().addAll(supprimerDocument,supprimerSepar,supprimerEtud,supprimerProf);
         supprimerProf.setId("dd");
+        // menu pour chercher:
+        ChercherMenu = new Menu("_Chercher");
+        ChercherDoc = new Menu("_Document");
+        ChercherProf = new MenuItem("_Professeur...");
+        ChercherEtud = new MenuItem("_Etudiant...");
+        ChercherSepar = new SeparatorMenuItem();
+        ChercherDocByISBM = new MenuItem("_ISBN...");
+        ChercherDocByTitre = new MenuItem("_Titre...");
+        ChercherDocByAuteur = new MenuItem("_Auteur...");
+        ChercherDocByEditeur = new MenuItem("_Edieur...");
 
-        menu.getMenus().addAll(ajouterMenu,supprimerMenu);
+        ChercherDoc.getItems().addAll(ChercherDocByISBM,ChercherDocByTitre,ChercherDocByAuteur,ChercherDocByEditeur);
+        ChercherMenu.getItems().addAll(ChercherDoc,ChercherSepar,ChercherProf,ChercherEtud);
+
+        menu.getMenus().addAll(ajouterMenu,supprimerMenu,ChercherMenu);
         mainLayout.setTop(menu);
 
         //partie gauch:
         Glayout = new VBox();
+        Glayout.setId("gl");
         tousDocs = new Button("\n\n\n\n\n\nTous les documents");
         tousDocs.getStyleClass().add("buttonGauch");
         tousDocs.setId("tousDocs");
@@ -100,37 +129,59 @@ public class MainWindow extends Application implements EventHandler<ActionEvent>
         tousPersons = new Button("\n\n\n\n\n\nTous les personnes");
         tousPersons.getStyleClass().add("buttonGauch");
         tousPersons.setId("tousPersonnes");
+        tousPersons.setOnAction(this);
         empruntee = new Button("\n\n\n\n\n\nempruntés");
         empruntee.getStyleClass().add("buttonGauch");
         empruntee.setId("empruntee");
+        empruntee.setOnAction(this);
         nonEmpuntee = new Button("\n\n\n\n\n\nNon empruntés");  
         nonEmpuntee.getStyleClass().add("buttonGauch");  
         nonEmpuntee.setId("nonEmpuntee");
+        nonEmpuntee.setOnAction(this);
+
         Glayout.getChildren().addAll(tousDocs,tousPersons,empruntee,nonEmpuntee);
         mainLayout.setLeft(Glayout);
         //partie centre:
         Clayout = new VBox();
         CBlayout = new VBox();
-        CBlayout.getStyleClass().add("centerLayout");
         mainLayout.setCenter(Clayout);
         spane = new ScrollPane(CBlayout);
         spane.setPannable(true);
-        spane.setMinHeight(500);
+        spane.setMinHeight(600);
+        spane.getStyleClass().add("centerLayout");
 
         CUlayout = new HBox();
         cherchField = new TextField();
         cherchField.getStyleClass().add("text-field");
+
         chercher = new Button("Chercher");
+        chercher.setId("chercher");
+
         CUlayout.getChildren().addAll(cherchField,chercher);
 
         Clayout.getChildren().addAll(CUlayout,spane);
         CUlayout.setId("up");
+
+        //partie droite:
+        Dlayout = new VBox();
+        tri_asc = new Button("\n\n\n\n\n\nAscendant");
+        tri_decs = new Button("\n\n\n\n\n\nDecsendant");
+        tri_date = new Label("     Trie par année\n      d'édition");
+        Dlayout.getChildren().addAll(tri_date,tri_asc,tri_decs);
+        Dlayout.setId("dl");
+        tri_asc.getStyleClass().add("buttonGauch");
+        tri_asc.setId("asc");
+        tri_decs.getStyleClass().add("buttonGauch");
+        tri_decs.setId("desc");
+        tri_date.setId("tril");
+        mainLayout.setRight(Dlayout);
 
         scene = new Scene(mainLayout, 1200,700);
         primaryStage.setScene(scene);
         scene.getStylesheets().add("GUI/Stylesheets/lButtons.css");
         scene.getStylesheets().add("GUI/Stylesheets/Upper.css");
         scene.getStylesheets().add("GUI/Stylesheets/DocCard.css");
+        scene.getStylesheets().add("GUI/Stylesheets/PersCar.css");
         primaryStage.show();
     }
     void ShowAllDocs(){
@@ -138,7 +189,16 @@ public class MainWindow extends Application implements EventHandler<ActionEvent>
         List<Document> docs = bibliotheque.getAllDocs();
         CBlayout.getChildren().clear();
         for(int i = 0; i <pos_docs; i++){
-            DocumentCard dc = new DocumentCard(docs.get(i),null);
+            DocumentCard dc = new DocumentCard(docs.get(i),CBlayout.getChildren(),bibliotheque);
+            CBlayout.getChildren().add(dc);
+        }
+    }
+    void ShowAllPersons(){
+        int pos_persons = bibliotheque.get_pos_pers();
+        List<Person> persons = bibliotheque.getAllPersons();
+        CBlayout.getChildren().clear();
+        for(int i = 0; i <pos_persons; i++){
+            PersonCard dc = new PersonCard(persons.get(i),CBlayout.getChildren(),bibliotheque);
             CBlayout.getChildren().add(dc);
         }
     }
@@ -171,6 +231,7 @@ public class MainWindow extends Application implements EventHandler<ActionEvent>
             if(person!= null){
                 try {
                     bibliotheque.ajouterAdherent(person);
+                    ShowAllPersons();
                     Alert cee = new Alert(AlertType.INFORMATION);
                     cee.setTitle("ajoute d'une personne");
                     cee.setContentText("la personne est ajouté !");
@@ -186,10 +247,10 @@ public class MainWindow extends Application implements EventHandler<ActionEvent>
             }
         }
         if(event.getSource() == supprimerDocument){
-            String titre = SuppDoc.titreASupp();
-            if(titre != null){
+            String isbm = SuppDoc.ISBMASupp();
+            if(isbm != null){
                 try {
-                    bibliotheque.supprimerDocument(titre);
+                    bibliotheque.supprimerDocument(isbm);
                     ShowAllDocs();
                     Alert cee = new Alert(AlertType.INFORMATION);
                     cee.setTitle("suppression");
@@ -245,6 +306,9 @@ public class MainWindow extends Application implements EventHandler<ActionEvent>
         }
         if(event.getSource() == tousDocs){
             ShowAllDocs();
+        }
+        if(event.getSource() == tousPersons){
+            ShowAllPersons();
         }
     }
 }
