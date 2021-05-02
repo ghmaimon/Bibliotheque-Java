@@ -5,7 +5,7 @@ public class Livre extends Document {
     // ************** attributes:
 
     int numPages;
-    String type;
+    String livre_type;
     String tome;
 
     // ************** getters et setters:
@@ -16,11 +16,11 @@ public class Livre extends Document {
     public void set_num_pages(int num_pages) {
         this.numPages = num_pages;
     }
-    public String get_type() {
-        return type;
+    public String get_livre_type() {
+        return livre_type;
     }
-    public void set_type(String type) {
-        this.type = type;
+    public void set_livre_type(String livre_type) {
+        this.livre_type = livre_type;
     }
     public String get_tome() {
         return tome;
@@ -35,8 +35,8 @@ public class Livre extends Document {
         String representation = super.toString();
         representation += "\nnombre des pages: ";
         representation += Integer.toString(numPages);
-        representation += "\ntype: ";
-        representation += type;
+        representation += "\nlivre_type: ";
+        representation += livre_type;
         representation += "\ntome:";
         representation += tome;
         
@@ -45,10 +45,11 @@ public class Livre extends Document {
     
     // ************** Constructeur:
 
-    public Livre(int ISBN,String titre,String auteurs,String editeur,String AneEdition,int numExemplaires,int num_pages,String type,String tome) {
+    public Livre(String ISBN,String titre,String auteurs,String editeur,String AneEdition,int numExemplaires,int num_pages,String livre_type,String tome) {
         super(ISBN, titre, auteurs, editeur, AneEdition, numExemplaires);
-        this.type = type;
+        this.livre_type = livre_type;
         this.numPages = num_pages;
         this.tome = tome;
+        type = "Livre";
     }
 }

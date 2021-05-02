@@ -60,6 +60,8 @@ public class SuppEtud {
         layout.setPadding(new Insets(10,10,10,10));
         Scene scene = new Scene(layout);
         window.setScene(scene);
+        layout.setPadding(new Insets(10,10,10,10));
+
         window.showAndWait();
 
         return cne;

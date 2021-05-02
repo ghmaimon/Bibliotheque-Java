@@ -1,28 +1,36 @@
 package typedocs;
 
+import typeperson.Person;
+
 public abstract class Document {
 
 
     // ************** attributes:
 
-    private int ISBN;
+    private String ISBN;
     private String titre;
     private String auteurs;
     private String editeur;
     private String AneEdition;
     private int numExemplaires;
+    protected String type;
+    private Person emprunteur;
 
-    private final int numEnregistrement;
-
-    private static int nextNumEnregistrement = 0;
 
     // ************** getters and setters:
 
+    public Person get_emprunteur(){
+        return emprunteur;
+    }
+    public void set_emprunteur(Person emp){
+        this.emprunteur = emp;
+    }
+
     // * ISBN:
-    public int get_ISBN() {
+    public String get_ISBN() {
         return ISBN;
     }
-    public void set_ISBN(int isbn) {
+    public void set_ISBN(String isbn) {
         this.ISBN = isbn;
     }
     // * titre:
@@ -61,20 +69,13 @@ public abstract class Document {
         this.numExemplaires = num_exemplaires;
     }
 
-    public static int get_next_num_enregistrement(){
-        return nextNumEnregistrement;
+    public String get_type(){
+        return type;
     }
-    public static void set_next_num_enregistrement(int nextNumEnregistrement){
-        Document.nextNumEnregistrement = nextNumEnregistrement;
-    }
-    public int get_num_enregistrement() {
-        return this.numEnregistrement;
-    }
-
     // ************** methods:
 
     public String toString(){
-        String representation = "numero d'enregistrement: " +numEnregistrement+ "\nISBN: " + Integer.toString(ISBN) + "\ntitre: " + titre + "\nauteurs: " + auteurs;
+        String representation = "ISBN: " + ISBN + "\ntitre: " + titre + "\nauteurs: " + auteurs;
         representation += "\nediteur: " + editeur;
         representation += "\nnumero d'exemplaires: " +Integer.toString(numExemplaires);
         representation += "\nannee d'edition: " + AneEdition;
@@ -90,16 +91,13 @@ public abstract class Document {
 
     // ************** constructeur:
 
-    public Document(int ISBN,String titre,String auteurs,String editeur,String AneEdition,int numExemplaires){
+    public Document(String ISBN,String titre,String auteurs,String editeur,String AneEdition,int numExemplaires){
         this.titre = titre;
         this.auteurs = auteurs;
         this.editeur = editeur;
         this.numExemplaires = numExemplaires;
         this.AneEdition = AneEdition;
         this.ISBN = ISBN;
-
-        this.numEnregistrement = get_next_num_enregistrement();
-        set_next_num_enregistrement(get_next_num_enregistrement() + 1);
     }
 
 }

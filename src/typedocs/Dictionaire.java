@@ -35,9 +35,10 @@ public class Dictionaire extends Document {
     
     // ************** Constructeur:
 
-    public Dictionaire(int ISBN,String titre,String auteurs,String editeur,String AneEdition,int numExemplaires,int num_tomes,String langue) {
+    public Dictionaire(String ISBN,String titre,String auteurs,String editeur,String AneEdition,int numExemplaires,int num_tomes,String langue) {
         super(ISBN, titre, auteurs, editeur, AneEdition, numExemplaires);
         this.langue = langue;
         this.numTomes = num_tomes;
+        type = "Dictionaire";
     }
 }

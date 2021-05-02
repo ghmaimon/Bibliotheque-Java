@@ -4,13 +4,16 @@ public class BandeDessinee extends Document{
     
         // ************** attributes:
     
-        private final boolean coloree;
+        private boolean coloree;
         private String genre;
     
         // ************** getters et setters:
     
         public boolean get_coloree() {
             return coloree;
+        }
+        public void set_coloree(boolean coloree){
+            this.coloree = coloree;
         }
 
         public String get_genre() {
@@ -19,7 +22,7 @@ public class BandeDessinee extends Document{
         public void set_genre(String genre) {
             this.genre = genre;
         }
-    
+
         // ************** methods:
     
         public String toString() {
@@ -31,9 +34,11 @@ public class BandeDessinee extends Document{
         
         // ************** Constructeur:
     
-        public BandeDessinee(int ISBN,String titre,String auteurs,String editeur,String AneEdition,int numExemplaires,boolean colore,String genre) {
+        public BandeDessinee(String ISBN,String titre,String auteurs,String editeur,String AneEdition,int numExemplaires,boolean colore,String genre) {
             super(ISBN, titre, auteurs, editeur, AneEdition, numExemplaires);
             this.coloree = colore;
             this.genre = genre;
+            type = "Bande Dessinée";
         }
+
 }

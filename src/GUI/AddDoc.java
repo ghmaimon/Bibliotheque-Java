@@ -90,13 +90,14 @@ public class AddDoc {
                         mainLayout_Livre.setPadding(new Insets(10,10,10,10));
                         gridLivre.setVgap(5);
                         gridLivre.setHgap(15);
+                        mainLayout_Livre.setSpacing(20);
 
                         HBox buttonsLayout_livre = new HBox();
 
                         Button Add_livre = new Button("Ajouter");
 
                         Add_livre.setOnAction(e1 -> {
-                            int isbn =  Integer.parseInt(ISBNTextField.getText());
+                            String isbn =  ISBNTextField.getText();
                             String auteur = AuteurTextField.getText();
                             String titre = titreTextField.getText();
                             String editeur = editeurTextField.getText();
@@ -114,6 +115,8 @@ public class AddDoc {
                         });
 
                         buttonsLayout_livre.getChildren().addAll(Add_livre,Cancel_livre);
+                        buttonsLayout_livre.setSpacing(20);
+
 
                         mainLayout_Livre.getChildren().addAll(nameW,typeDoc,gridLivre,buttonsLayout_livre);
 
@@ -132,7 +135,7 @@ public class AddDoc {
                         Label AneEditionlabel = new Label("Année d'edition :");
                         Label numExemplaireslabel = new Label("numero d'exemplaires :");
                         Label numTomeslabel = new Label("numero de tomes :");
-                        Label langelabel = new Label("lange :");
+                        Label langelabel = new Label("langue :");
                         GridPane gridDict = new GridPane();
 
                         gridDict.add(ISBNlabel, 0, 0,1,1);
@@ -163,6 +166,8 @@ public class AddDoc {
                         gridDict.add(langeTextField, 1, 7,1,1);
 
                         VBox mainLayout_dictionnaire = new VBox();
+                        mainLayout_dictionnaire.setSpacing(20);
+
 
                         mainLayout_dictionnaire.setPadding(new Insets(10,10,10,10));
                         gridDict.setVgap(5);
@@ -173,7 +178,7 @@ public class AddDoc {
                         Button Add_dictionnaire = new Button("Ajouter");
                         Button Cancel_dictionnaire = new Button("Annuler");
                         Add_dictionnaire.setOnAction(e1 -> {
-                            int isbn =  Integer.parseInt(ISBNTextField.getText());
+                            String isbn =  ISBNTextField.getText();
                             String auteur = AuteurTextField.getText();
                             String titre = titreTextField.getText();
                             String editeur = editeurTextField.getText();
@@ -188,6 +193,7 @@ public class AddDoc {
                             window.close();
                         });
                         buttonsLayout_dictionnaire.getChildren().addAll(Add_dictionnaire,Cancel_dictionnaire);
+                        buttonsLayout_dictionnaire.setSpacing(20);
 
                         mainLayout_dictionnaire.getChildren().addAll(nameW,typeDoc,gridDict,buttonsLayout_dictionnaire);
 
@@ -242,13 +248,15 @@ public class AddDoc {
                         mainLayout_bandedessinee.setPadding(new Insets(10,10,10,10));
                         gridBd.setVgap(5);
                         gridBd.setHgap(15);
+                        mainLayout_bandedessinee.setSpacing(20);
+
                 
                 
                         HBox buttonsLayout_bandedessinee = new HBox();
                         Button Add_bandedessinee = new Button("Ajouter");
                         Button Cancel_bandedessinee = new Button("Annuler");
                         Add_bandedessinee.setOnAction(e1 -> {
-                            int isbn =  Integer.parseInt(ISBNTextField.getText());
+                            String isbn =  ISBNTextField.getText();
                             String auteur = AuteurTextField.getText();
                             String titre = titreTextField.getText();
                             String editeur = editeurTextField.getText();
@@ -263,6 +271,8 @@ public class AddDoc {
                             window.close();
                         });
                         buttonsLayout_bandedessinee.getChildren().addAll(Add_bandedessinee,Cancel_bandedessinee);
+                        buttonsLayout_bandedessinee.setSpacing(20);
+
                 
                         mainLayout_bandedessinee.getChildren().addAll(nameW,typeDoc,gridBd,buttonsLayout_bandedessinee);
                 
@@ -322,12 +332,14 @@ public class AddDoc {
                         mainLayout_magazine.setPadding(new Insets(10,10,10,10));
                         gridM.setVgap(5);
                         gridM.setHgap(15);
+                        mainLayout_magazine.setSpacing(20);
+
                 
                         HBox buttonsLayout_magazine = new HBox();
                         Button Add_magazine = new Button("Ajouter");
                         Button Cancel_magazine = new Button("Annuler");
                         Add_magazine.setOnAction(e1 -> {
-                            int isbn =  Integer.parseInt(ISBNTextField.getText());
+                            String isbn =  ISBNTextField.getText();
                             String auteur = AuteurTextField.getText();
                             String titre = titreTextField.getText();
                             String editeur = editeurTextField.getText();
@@ -343,6 +355,8 @@ public class AddDoc {
                             window.close();
                         });
                         buttonsLayout_magazine.getChildren().addAll(Add_magazine,Cancel_magazine);
+                        buttonsLayout_magazine.setSpacing(20);
+
                 
                         mainLayout_magazine.getChildren().addAll(nameW,typeDoc,gridM,buttonsLayout_magazine);
                 
@@ -361,6 +375,8 @@ public class AddDoc {
         Label nameW = new Label("Ajouter un document");
         defl.getChildren().addAll(nameW,typeDoc);
         Scene sel = new Scene(defl);
+        defl.setPadding(new Insets(10,10,10,10));
+
         window.setScene(sel);
         window.showAndWait();
 

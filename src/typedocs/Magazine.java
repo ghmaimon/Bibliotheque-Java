@@ -27,6 +27,7 @@ public class Magazine extends Document {
     public void set_jour_edition(int jour_edition) {
         this.jourEdition = jour_edition;
     }
+    
     // ************** methods:
 
     public String toString() {
@@ -43,10 +44,11 @@ public class Magazine extends Document {
     
     // ************** Constructeur:
 
-    public Magazine(int ISBN,String titre,String auteurs,String editeur,String AneEdition,int numExemplaires,int periodicity,int mois_edition,int jour_edition) {
+    public Magazine(String ISBN,String titre,String auteurs,String editeur,String AneEdition,int numExemplaires,int periodicity,int mois_edition,int jour_edition) {
         super(ISBN, titre, auteurs, editeur, AneEdition, numExemplaires);
         this.periodicity = periodicity;
         this.moisEdition = mois_edition;
         this.jourEdition = jour_edition;
+        type = "Magazine";
     }
 }

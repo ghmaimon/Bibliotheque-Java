@@ -1,0 +1,52 @@
+.text-field {
+    -fx-background-color: -fx-text-box-border, -fx-background ;
+    -fx-background-insets: 0, 0 0 1 0 ;
+    -fx-background-radius: 5 ;
+    -fx-min-height : 35;
+    -fx-min-width : 405;
+    -fx-font-size : 26;
+    -fx-border-color:rgb(140, 140, 226);
+    -fx-effect: dropshadow(three-pass-box, rgb(168, 168, 219), 2, 0, 0, 0);
+    -fx-border-style:solid;
+    -fx-border-radius:5;
+}
+.text-field:focused {
+    -fx-background-color: -fx-focus-color, -fx-background ;
+    -fx-border-color:rgb(67, 67, 211);
+    -fx-border-style:solid;
+    -fx-border-radius:5;
+    -fx-effect: dropshadow(three-pass-box, rgb(117, 117, 235), 10, 0, 0, 0);
+}
+
+#up{
+    -fx-min-height : 55;
+    -fx-padding: 5 30 5 5;
+    
+}
+#chercher{
+    -fx-min-height : 50;
+    -fx-max-height : 50;
+    -fx-min-width : 150;
+    -fx-padding: 15;
+    -fx-border-insets: 2 10 0 10;
+    -fx-background-insets: 2 10 0 10;
+    -fx-background-radius: 4px;
+    -fx-font-size:14px;
+    -fx-font-weight: bold;
+    -fx-text-alignment:center;
+    -fx-background-color : rgb(195, 219, 233);
+}
+#chercher:hover{
+    -fx-background-color : rgb(175, 216, 240);
+    -fx-border-color: rgb(98, 153, 236) ;
+    -fx-border-width: 2 ; 
+    -fx-border-style: solid ;
+    -fx-border-radius : 4px;
+}
+#chercher:pressed{
+    -fx-background-color : rgb(138, 201, 238);
+    -fx-border-color: rgb(111, 160, 235) ;
+    -fx-border-width: 2 ; 
+    -fx-border-style: solid ;
+    -fx-border-radius : 4px;
+}

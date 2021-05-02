@@ -1,0 +1,28 @@
+.etud_card_image{
+    -fx-min-height : 150;
+    -fx-max-height : 150;
+    -fx-min-width : 180;
+    -fx-max-width : 180;
+    -fx-padding: 7;
+    -fx-border-insets: 2px;
+    -fx-background-insets: 2px;
+    -fx-background-radius: 10px;
+    -fx-background-image: url(../Images/student.png);
+    -fx-background-size: 100%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+.prof_card_image{
+    -fx-min-height : 150;
+    -fx-max-height : 150;
+    -fx-min-width : 180;
+    -fx-max-width : 180;
+    -fx-padding: 7;
+    -fx-border-insets: 2px;
+    -fx-background-insets: 2px;
+    -fx-background-radius: 10px;
+    -fx-background-image: url(../Images/prof.png);
+    -fx-background-size: 100%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
