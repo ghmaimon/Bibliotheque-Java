@@ -107,9 +107,10 @@ public class PersonCard extends Group implements EventHandler<ActionEvent> {
             nom.setText(person.get_nom() + " " + person.get_prenom());
         }
         if(event.getSource() == emprunter){
+            DocumentCard dc;
             list.clear();
-            for(int i=0;i<this.person.get_numEmprunts()+1;i++){
-                DocumentCard dc = new DocumentCard(this.person.empruntes[i],list,bib);
+            for(int i=0;i<this.person.get_numEmprunts();i++){
+                dc = new DocumentCard(this.person.empruntes[i],list,bib);
                 list.add(dc);
             }
         }

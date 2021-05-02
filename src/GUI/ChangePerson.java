@@ -1,6 +1,5 @@
 package GUI;
 
-import java.time.LocalDate;
 
 import javafx.geometry.Insets;
 import javafx.scene.Scene;

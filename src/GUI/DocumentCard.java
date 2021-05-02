@@ -123,7 +123,8 @@ public class DocumentCard extends Group implements EventHandler<ActionEvent> {
                                 this.emprunteur.set_numEmprunts(this.emprunteur.get_numEmprunts()+1);
                                 this.document.set_emprunteur(per);
                                 this.emps.setDisable(true);
-                                empruntee.setText("Etat : emprunté par " + this.document.get_emprunteur().get_nom() + " " + this.document.get_emprunteur().get_prenom());
+                                emprunteestr = "Etat : emprunté par " + this.document.get_emprunteur().get_nom() + " " + this.document.get_emprunteur().get_prenom();
+                                empruntee.setText(emprunteestr);
                             }               
                             else{
                                 Alert cee = new Alert(AlertType.ERROR);
@@ -154,7 +155,8 @@ public class DocumentCard extends Group implements EventHandler<ActionEvent> {
                                 this.emprunteur.set_numEmprunts(this.emprunteur.get_numEmprunts()+1);
                                 this.document.set_emprunteur(per);
                                 this.emps.setDisable(true);
-                                empruntee.setText("Etat : emprunté par " + this.document.get_emprunteur().get_nom() + " " + this.document.get_emprunteur().get_prenom());
+                                emprunteestr = "Etat : emprunté par " + this.document.get_emprunteur().get_nom() + " " + this.document.get_emprunteur().get_prenom();
+                                empruntee.setText(emprunteestr);
                             }               
                             else{
                                 Alert cee = new Alert(AlertType.ERROR);

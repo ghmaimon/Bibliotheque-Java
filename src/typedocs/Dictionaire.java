@@ -39,6 +39,6 @@ public class Dictionaire extends Document {
         super(ISBN, titre, auteurs, editeur, AneEdition, numExemplaires);
         this.langue = langue;
         this.numTomes = num_tomes;
-        type = "Dictionnaire";
+        type = "Dictionaire";
     }
 }

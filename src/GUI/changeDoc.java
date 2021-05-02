@@ -149,10 +149,9 @@ public class changeDoc {
                         VBox mainLayout_dictionnaire = new VBox();
 
                         mainLayout_dictionnaire.setPadding(new Insets(10,10,10,10));
-                        mainLayout_dictionnaire.setSpacing(20);
                         gridDict.setVgap(5);
                         gridDict.setHgap(15);
-
+                        mainLayout_dictionnaire.setSpacing(20);
 
                         HBox buttonsLayout_dictionnaire = new HBox();
                         Button Add_dictionnaire = new Button("Changer");
