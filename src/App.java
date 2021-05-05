@@ -18,17 +18,26 @@ import javafx.scene.Scene;
 import javafx.event.EventHandler;
 import javafx.event.ActionEvent;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.List;
+
+
 import exceptions.CapacityExceededException;
 import exceptions.ElementNotFoundException;
-
-import java.util.List;
 
 import GUI.*;
 import bibliotheque.Bibliotheque;
 import typedocs.*;
 import typeperson.*;
 
+import java.sql.Connection;
+import java.sql.Statement;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+
 public class App extends Application implements EventHandler<ActionEvent>{
+
 
     Bibliotheque bibliotheque = new Bibliotheque(1000,1000);
     //scene:
@@ -74,6 +83,13 @@ public class App extends Application implements EventHandler<ActionEvent>{
     
     @Override
     public void start(Stage primaryStage) throws Exception {
+
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/bibliotheque", "biblio_admin", "Halazona1998");
+        Statement st = conn.createStatement();
+        ResultSet rs = st.executeQuery("");
+        rs.next();
+
         primaryStage.setTitle("Bibliotheque");
         primaryStage.setResizable(false);
         mainLayout = new BorderPane();
@@ -101,12 +117,18 @@ public class App extends Application implements EventHandler<ActionEvent>{
         ChercherMenu = new Menu("_Chercher");
         ChercherDoc = new Menu("_Document");
         ChercherProf = new MenuItem("_Professeur...");
+        ChercherProf.setOnAction(this);
         ChercherEtud = new MenuItem("_Etudiant...");
+        ChercherEtud.setOnAction(this);
         ChercherSepar = new SeparatorMenuItem();
         ChercherDocByISBM = new MenuItem("_ISBN...");
+        ChercherDocByISBM.setOnAction(this);
         ChercherDocByTitre = new MenuItem("_Titre...");
+        ChercherDocByTitre.setOnAction(this);
         ChercherDocByAuteur = new MenuItem("_Auteur...");
+        ChercherDocByAuteur.setOnAction(this);
         ChercherDocByEditeur = new MenuItem("_Edieur...");
+        ChercherDocByEditeur.setOnAction(this);
 
         ChercherDoc.getItems().addAll(ChercherDocByISBM,ChercherDocByTitre,ChercherDocByAuteur,ChercherDocByEditeur);
         ChercherMenu.getItems().addAll(ChercherDoc,ChercherSepar,ChercherProf,ChercherEtud);
@@ -177,7 +199,9 @@ public class App extends Application implements EventHandler<ActionEvent>{
         scene.getStylesheets().add("GUI/Stylesheets/Upper.css");
         scene.getStylesheets().add("GUI/Stylesheets/DocCard.css");
         scene.getStylesheets().add("GUI/Stylesheets/PersCar.css");
-        primaryStage.show();
+        primaryStage.showAndWait();
+        st.close();
+        conn.close();
     }
     void ShowAllDocs(){
         int pos_docs = bibliotheque.get_pos_docs();
@@ -325,6 +349,34 @@ public class App extends Application implements EventHandler<ActionEvent>{
                     DocumentCard dc = new DocumentCard(docs.get(i),CBlayout.getChildren(),bibliotheque);
                     CBlayout.getChildren().add(dc);
                 } 
+            }
+        }
+        if(event.getSource() == ChercherProf){
+            String cin = ChercherPers.cinACher();
+            if(cin != null){
+                int pos_docs = bibliotheque.get_pos_pers();
+                List<Person> docs = bibliotheque.getAllPersons();
+                CBlayout.getChildren().clear();
+                for(int i = 0; i <pos_docs; i++){
+                    if(docs.get(i).get_nom().equals(cin)&&docs.get(i).get_type().equals("professeur")){
+                        PersonCard dc = new PersonCard(docs.get(i),CBlayout.getChildren(),bibliotheque);
+                        CBlayout.getChildren().add(dc);
+                    } 
+                }
+            }
+        }
+        if(event.getSource() == ChercherEtud){
+            String cne = ChercherPers.cneACher();
+            if(cne != null){
+                int pos_docs = bibliotheque.get_pos_pers();
+                List<Person> docs = bibliotheque.getAllPersons();
+                CBlayout.getChildren().clear();
+                for(int i = 0; i <pos_docs; i++){
+                    if(docs.get(i).get_nom().equals(cne)&&docs.get(i).get_type().equals("professeur")){
+                        PersonCard dc = new PersonCard(docs.get(i),CBlayout.getChildren(),bibliotheque);
+                        CBlayout.getChildren().add(dc);
+                    } 
+                }
             }
         }
     }
