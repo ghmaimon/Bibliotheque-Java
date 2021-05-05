@@ -56,18 +56,14 @@
     -fx-border-radius : 10px;
 }
 .centerLayout{
-    background-image: url(../Images/f.jpg);
-    -fx-min-height : 600;
-    -fx-max-height : 600;
-    -fx-min-width : 600;
-    -fx-max-width : 1000;
+
     -fx-padding: 7;
     -fx-border-insets: 2px;
     -fx-background-insets: 2px;
     -fx-background-radius: 10px;
-    -fx-text-alignment:center;
-    -fx-effect: dropshadow(three-pass-box, rgb(143, 143, 202), 25, 0, 0, 0);
+    -fx-background-color:rgba(215, 215, 250, 0.705);
 }
+.centerLayout > .viewport  { -fx-background-color: rgba(166, 166, 243, 0); }
 #gl{
     -fx-border-insets: 60 0 0 0;
     -fx-background-insets: 60 0 0 0;

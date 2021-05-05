@@ -35,6 +35,7 @@ import java.sql.Connection;
 import java.sql.Statement;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class App extends Application implements EventHandler<ActionEvent>{
 
@@ -80,15 +81,26 @@ public class App extends Application implements EventHandler<ActionEvent>{
     Button tri_asc;
     Button tri_decs;
     Label tri_date;
+
+    //database connection:
+    ResultSet rs;
+    Statement st;
+    Connection conn;
+    String driver = "com.mysql.cj.jdbc.Driver";
+    String url = "jdbc:mysql://localhost/bibliotheque";
+    String username = "biblio_admin";
+    String password = "Halazona1998";
+    String query;
     
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/bibliotheque", "biblio_admin", "Halazona1998");
-        Statement st = conn.createStatement();
-        ResultSet rs = st.executeQuery("");
-        rs.next();
+        Class.forName(driver);
+        conn = DriverManager.getConnection(url, username, password);
+        st = conn.createStatement();
+
+
+        bibliotheque = new Bibliotheque(1000, 1200);
 
         primaryStage.setTitle("Bibliotheque");
         primaryStage.setResizable(false);
@@ -181,14 +193,12 @@ public class App extends Application implements EventHandler<ActionEvent>{
 
         //partie droite:
         Dlayout = new VBox();
-        tri_asc = new Button("\n\n\n\n\n\nAscendant");
-        tri_decs = new Button("\n\n\n\n\n\nDecsendant");
+        tri_asc = new Button();
+        tri_decs = new Button();
         tri_date = new Label("     Trie par année\n      d'édition");
         Dlayout.getChildren().addAll(tri_date,tri_asc,tri_decs);
         Dlayout.setId("dl");
-        tri_asc.getStyleClass().add("buttonGauch");
         tri_asc.setId("asc");
-        tri_decs.getStyleClass().add("buttonGauch");
         tri_decs.setId("desc");
         tri_date.setId("tril");
         mainLayout.setRight(Dlayout);
@@ -199,9 +209,21 @@ public class App extends Application implements EventHandler<ActionEvent>{
         scene.getStylesheets().add("GUI/Stylesheets/Upper.css");
         scene.getStylesheets().add("GUI/Stylesheets/DocCard.css");
         scene.getStylesheets().add("GUI/Stylesheets/PersCar.css");
-        primaryStage.showAndWait();
-        st.close();
-        conn.close();
+
+        //fetch data:
+
+        //documents:
+        
+
+        primaryStage.setOnCloseRequest(e->{
+            try {
+                st.close();
+                conn.close();
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            }
+        });
+        primaryStage.show();
     }
     void ShowAllDocs(){
         int pos_docs = bibliotheque.get_pos_docs();

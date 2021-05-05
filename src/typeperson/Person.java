@@ -13,7 +13,7 @@ public abstract class Person {
     private int age;
     private String cin;
     private String address;
-    private LocalDate naissance; 
+    private LocalDate naissance;
     private String numTelefone;
     private String email;
     protected int numEmpruntsMax;
@@ -22,9 +22,8 @@ public abstract class Person {
     private int numEmprunts;
 
 
-    protected static int id_counter = 0;
-
     // ************ getters et setters:
+
 
     public String get_type(){
         return type;

@@ -17,6 +17,7 @@ public abstract class Document {
     private Person emprunteur;
 
 
+
     // ************** getters and setters:
 
     public Person get_emprunteur(){
