@@ -3,10 +3,10 @@
 
 <p>
 in this application we can add users(students or professors) and documents(comics, dicionaries, books, and magazines),
-and a borrowing system is provided, there is also other features like searching and deleting ...
+and save user's borows, there is also other features like searching and deleting ...
 </p><br>
 
-<i>note: the project is made in french</i><br>
+<i>note: the project is in french</i><br>
 
 ## Compilation And Execution:
 ### To Compile:
