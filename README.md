@@ -3,10 +3,10 @@
 
 <p>
 in this application we can add users(students or professors) and documents(comics, dicionaries, books, and magazines),
-and a borrowing system is provided, there is also other features like searching and deleting ...
+and save user's borows, there is also other features like searching and deleting ...
 </p><br>
 
-<i>note: the project is made in french</i><br>
+<i>note: the project is in french</i><br>
 
 ## Compilation And Execution:
 ### To Compile:
@@ -15,3 +15,4 @@ and a borrowing system is provided, there is also other features like searching 
     javac --module-path $PATH_TO_FX --add-modules javafx.controls,javafx.fxml */*.java App.java
 ### To Excecute:
     java --module-path $PATH_TO_FX --add-modules javafx.controls -cp .:$PATH_TO_FX/mysql-connector-java-8.0.24.jar App
+
