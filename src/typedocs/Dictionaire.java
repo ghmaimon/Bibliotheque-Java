@@ -41,4 +41,10 @@ public class Dictionaire extends Document {
         this.numTomes = num_tomes;
         type = "Dictionaire";
     }
+    public Dictionaire(int id, String ISBN,String titre,String auteurs,String editeur,String AneEdition,int numExemplaires,int num_tomes,String langue) {
+        super(id, ISBN, titre, auteurs, editeur, AneEdition, numExemplaires);
+        this.langue = langue;
+        this.numTomes = num_tomes;
+        type = "Dictionaire";
+    }
 }

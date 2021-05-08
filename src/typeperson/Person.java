@@ -20,11 +20,13 @@ public abstract class Person {
     protected String type;
     public Document[] empruntes;
     private int numEmprunts;
+    private int id;
 
+    private static int id_counter = 0;
 
     // ************ getters et setters:
 
-
+    public int get_id(){ return id;}
     public String get_type(){
         return type;
     }
@@ -112,5 +114,21 @@ public abstract class Person {
         this.address = address;
         this.numTelefone = numTelefone;
         numEmprunts = 0;
+        id = id_counter;
+        id_counter++;
+    }
+    public Person(int id,String nom, String prenom,int age,String email, String cin,String numTelefone,String address, LocalDate naissance) {
+
+        this.nom = nom;
+        this.prenom = prenom;
+        this.age = age;
+        this.email = email;
+        this.cin = cin;
+        this.naissance = naissance;
+        this.address = address;
+        this.numTelefone = numTelefone;
+        numEmprunts = 0;
+        this.id = id;
+        id_counter = id> id_counter ? id : id_counter;
     }
 }

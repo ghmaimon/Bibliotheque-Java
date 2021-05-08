@@ -56,4 +56,14 @@ public class Etudiant extends Person{
         type = "etudiant";
         empruntes = new Document[numEmpruntsMax];
     }
+
+    public Etudiant(int id, String nom, String prenom,int age,String email, String cin,String numTelefone,String address, LocalDate naissance, String filier, int niveau,boolean boursie,String cne){
+        super(id, nom, prenom, age, email, cin, numTelefone, address, naissance);
+        this.numEmpruntsMax = 3;
+        this.niveau = niveau;
+        this.filier = filier;
+        this.boursie = boursie;
+        type = "etudiant";
+        empruntes = new Document[numEmpruntsMax];
+    }
 }

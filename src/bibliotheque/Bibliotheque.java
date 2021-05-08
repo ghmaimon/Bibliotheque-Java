@@ -95,7 +95,7 @@ public class Bibliotheque {
     }
     public Etudiant getEtudiantByCne(String cne) throws ElementNotFoundException{
         for (int i = 0; i< this.listEmprunteurs.size(); i++){
-            if(this.listEmprunteurs.get(i) instanceof Etudiant){
+            if(this.listEmprunteurs.get(i).get_type().equals("etudiant")){
                 Etudiant E = (Etudiant)this.listEmprunteurs.get(i);
                 if(E.get_cne().equals(cne)){
                     return E;
@@ -106,12 +106,20 @@ public class Bibliotheque {
     }
     public Professeur getProfesseurByCin(String cin) throws ElementNotFoundException{
         for (int i = 0; i< this.listEmprunteurs.size(); i++){
-            if(this.listEmprunteurs.get(i) instanceof Professeur){
+            if(this.listEmprunteurs.get(i).get_type().equals("professeur")){
                 Professeur E = (Professeur)this.listEmprunteurs.get(i);
                 if(E.get_cin().equals(cin)){
                     return E;
                 }
             }
+        }
+        throw new ElementNotFoundException("Professeur");
+    }
+    public Person getPersibByCin(String cin) throws ElementNotFoundException{
+        for (int i = 0; i< this.listEmprunteurs.size(); i++){
+                if(this.listEmprunteurs.get(i).get_cin().equals(cin)){
+                    return this.listEmprunteurs.get(i);
+                }
         }
         throw new ElementNotFoundException("Professeur");
     }

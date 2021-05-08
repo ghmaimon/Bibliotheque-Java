@@ -14,4 +14,4 @@ and a borrowing system is provided, there is also other features like searching 
     export PATH_TO_FX=../lib
     javac --module-path $PATH_TO_FX --add-modules javafx.controls,javafx.fxml */*.java App.java
 ### To Excecute:
-    java --module-path $PATH_TO_FX --add-modules javafx.controls,mysql-connector -cp .:$PATH_TO_FX/mysql-connector-java-8.0.24.jar App
+    java --module-path $PATH_TO_FX --add-modules javafx.controls -cp .:$PATH_TO_FX/mysql-connector-java-8.0.24.jar App

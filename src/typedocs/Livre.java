@@ -52,4 +52,11 @@ public class Livre extends Document {
         this.tome = tome;
         type = "Livre";
     }
+    public Livre(int id, String ISBN,String titre,String auteurs,String editeur,String AneEdition,int numExemplaires,int num_pages,String livre_type,String tome) {
+        super(id, ISBN, titre, auteurs, editeur, AneEdition, numExemplaires);
+        this.livre_type = livre_type;
+        this.numPages = num_pages;
+        this.tome = tome;
+        type = "Livre";
+    }
 }

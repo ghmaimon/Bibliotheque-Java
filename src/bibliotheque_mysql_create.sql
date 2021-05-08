@@ -1,4 +1,10 @@
-user bibliotheque;
+use bibliotheque;
+
+SELECT id,d.isbn, titre, d.auteur, d.cin_emprunteur, d.anneeEdition, d.editeur, d.numExemplaires,
+                d.type, b.coloree, b.genre, di.langue, di.numTomes, l.livre_type, l.numPages,l.tome, m.jourEdition,
+                m.moisEdition, m.periodicity FROM Document d INNER JOIN BandeDessinee b ON d.isbn = b.isbn
+                INNER JOIN Dictionaire di ON di.isbn = d.isbn INNER JOIN Livre l ON d.isbn = l.isbn
+            	INNER JOIN Magazine m ON m.isbn = d.isbn
 
 CREATE TABLE `Document` (
 	`isbn` varchar(13) NOT NULL,
@@ -24,21 +30,21 @@ CREATE TABLE `Person` (
 );
 
 CREATE TABLE `BandeDessinee` (
-	`isbn` bigint NOT NULL,
+	`isbn` varchar(10) NOT NULL,
 	`coloree` bool,
 	`genre` varchar(15),
 	PRIMARY KEY (`isbn`)
 );
 
 CREATE TABLE `Dictionaire` (
-	`isbn` bigint NOT NULL,
+	`isbn` varchar(10) NOT NULL,
 	`numTomes` int,
 	`langue` varchar(15),
 	PRIMARY KEY (`isbn`)
 );
 
 CREATE TABLE `Livre` (
-	`isbn` bigint NOT NULL,
+	`isbn` varchar(10) NOT NULL,
 	`numPages` int,
 	`livre_type` varchar(15),
 	`tome` varchar(15),
@@ -46,7 +52,7 @@ CREATE TABLE `Livre` (
 );
 
 CREATE TABLE `Magazine` (
-	`isbn` bigint NOT NULL,
+	`isbn` varchar(10) NOT NULL,
 	`periodicity` int,
 	`moisEdition` int,
 	`jourEdition` int,

@@ -63,7 +63,7 @@ public class App extends Application implements EventHandler<ActionEvent>{
     MenuItem ChercherDocByTitre;
     MenuItem ChercherDocByAuteur;
     MenuItem ChercherDocByEditeur;
-    //partie gauch:
+    //partie gauche:
     VBox Glayout;
     Button tousDocs;
     Button tousPersons;
@@ -76,11 +76,19 @@ public class App extends Application implements EventHandler<ActionEvent>{
     TextField cherchField;
     Button chercher;
 
-    //partie gauche:
+    //partie droite:
     VBox Dlayout;
     Button tri_asc;
     Button tri_decs;
     Label tri_date;
+    Label persons;
+    Label documents;
+    Button bande_dessinee;
+    Button livre;
+    Button dictionaire;
+    Button magazine;
+    Button etudiant;
+    Button professeur;
 
     //database connection:
     ResultSet rs;
@@ -91,6 +99,8 @@ public class App extends Application implements EventHandler<ActionEvent>{
     String username = "biblio_admin";
     String password = "Halazona1998";
     String query;
+    Document tempDoc;
+    Person tempPers;
     
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -98,7 +108,6 @@ public class App extends Application implements EventHandler<ActionEvent>{
         Class.forName(driver);
         conn = DriverManager.getConnection(url, username, password);
         st = conn.createStatement();
-
 
         bibliotheque = new Bibliotheque(1000, 1200);
 
@@ -195,12 +204,32 @@ public class App extends Application implements EventHandler<ActionEvent>{
         Dlayout = new VBox();
         tri_asc = new Button();
         tri_decs = new Button();
-        tri_date = new Label("     Trie par année\n      d'édition");
-        Dlayout.getChildren().addAll(tri_date,tri_asc,tri_decs);
+        tri_date = new Label("    Documents\n    Triés par année\n    d'édition");
+        persons = new Label("          Persons");
+        documents = new Label("        Documents");
+        bande_dessinee = new Button("Bande dessinées");
+        livre = new Button("Livres");
+        magazine = new Button("Magazines");
+        dictionaire = new Button("Dictionaires");
+        professeur = new Button("Professeurs");
+        etudiant = new Button("Etudiants");
+        Dlayout.getChildren().addAll(tri_date,tri_asc,tri_decs,persons,etudiant,professeur,documents,bande_dessinee,livre,magazine,dictionaire);
+        documents.getStyleClass().add("tril");
+        persons.getStyleClass().add("tril");
+        tri_date.getStyleClass().add("tril");
+        bande_dessinee.getStyleClass().add("dbutton");
+        livre.getStyleClass().add("dbutton");
+        magazine.getStyleClass().add("dbutton");
+        dictionaire.getStyleClass().add("dbutton");
+        professeur.getStyleClass().add("dbutton");
+        etudiant.getStyleClass().add("dbutton");
+        tri_decs.getStyleClass().add("dbutton");
+        tri_asc.getStyleClass().add("dbutton");
         Dlayout.setId("dl");
         tri_asc.setId("asc");
         tri_decs.setId("desc");
-        tri_date.setId("tril");
+        tri_date.setId("tdate");
+
         mainLayout.setRight(Dlayout);
 
         scene = new Scene(mainLayout, 1200,700);
@@ -212,9 +241,146 @@ public class App extends Application implements EventHandler<ActionEvent>{
 
         //fetch data:
 
-        //documents:
-        
+        //persons:
+        query = "SELECT nom, prenom, p.cin, address,"
+                +"numTelefon, email, type, id, "
+                +"cours, grade, cne, filier,"
+                +"niveau, boursie "
+                +"FROM Person p "
+                +"LEFT JOIN Etudiant e "
+                +"ON p.cin = e.cin "
+                +"LEFT JOIN Professeur pr "
+                +"ON pr.cin = p.cin "
+                +" ORDER BY id;";
+        rs = st.executeQuery(query);
 
+        while(rs.next()){
+            switch(rs.getString("type")){
+                case "etudiant":{
+                    tempPers = new Etudiant(
+                        rs.getInt("id"),
+                        rs.getString("nom"),
+                        rs.getString("prenom"),
+                        rs.getInt("age"),
+                        rs.getString("email"),
+                        rs.getString("cin"),
+                        rs.getString("numTelefon"),
+                        rs.getString("address"),
+                        rs.getDate("naissance").toLocalDate(),
+                        rs.getString("filier"),
+                        rs.getInt("niveau"),
+                        rs.getBoolean("boursie"),
+                        rs.getString("cne"));
+                    bibliotheque.ajouterAdherent(tempPers);
+                    break;
+                }
+                case "professeur":{
+                    tempPers = new Professeur(
+                        rs.getInt("id"),
+                        rs.getString("nom"),
+                        rs.getString("prenom"),
+                        rs.getInt("age"),
+                        rs.getString("email"),
+                        rs.getString("cin"),
+                        rs.getString("numTelefon"),
+                        rs.getString("address"),
+                        rs.getDate("naissance").toLocalDate(),
+                        rs.getString("cours"),
+                        rs.getInt("grade"));
+                    bibliotheque.ajouterAdherent(tempPers);
+                    break;
+                }
+            }
+        }
+        //documents:
+        query = "SELECT id,d.isbn, d.titre, d.auteur, d.cin_emprunteur, d.anneeEdition, d.editeur, d.numExemplaires,"
+                +" d.type, b.coloree, b.genre, di.langue, di.numTomes, l.livre_type, l.numPages,l.tome, m.jourEdition,"
+                +" m.moisEdition, m.periodicity FROM Document d INNER JOIN BandeDessinee b ON d.isbn = b.isbn"
+                +" INNER JOIN Dictionaire di ON di.isbn = d.isbn INNER JOIN Livre l ON d.isbn = l.isbn"
+                +" INNER JOIN Magazine m ON m.isbn = d.isbn"
+                +" ORDER BY id";
+        
+        rs = st.executeQuery(query);
+
+        while(rs.next()){
+            switch(rs.getString("type")){
+                case "Bande Dessinée":{
+                    tempDoc = new BandeDessinee(rs.getInt("id"),
+                    rs.getString("isbn"),rs.getString("titre"),
+                    rs.getString("auteur"),rs.getString("editeur"),
+                    rs.getString("anneeEdition"),
+                    rs.getInt("numExemplaires"),
+                    rs.getBoolean("coloree"),
+                    rs.getString("genre"));
+                    try{
+                        tempPers = bibliotheque.getPersibByCin(rs.getString("cin_emprunteur"));
+                        tempDoc.set_emprunteur(tempPers);
+                        bibliotheque.ajouterDocument(tempDoc);
+                    } catch (ElementNotFoundException e) {
+                        System.exit(1);
+                    }
+                }
+                case "Dictionaire":{
+                    tempDoc = new Dictionaire(rs.getInt("id"),
+                    rs.getString("isbn"),rs.getString("titre"),
+                    rs.getString("auteur"),rs.getString("editeur"),
+                    rs.getString("anneeEdition"),
+                    rs.getInt("numExemplaires"),
+                    rs.getInt("numTomes"),
+                    rs.getString("langue"));
+                    try{
+                        tempPers = bibliotheque.getPersibByCin(rs.getString("cin_emprunteur"));
+                        tempDoc.set_emprunteur(tempPers);
+                        bibliotheque.ajouterDocument(tempDoc);
+                    } catch (ElementNotFoundException e) {
+                        System.exit(1);
+                    }
+                }
+                case "Livre":{
+                    tempDoc = new Livre(
+                        rs.getInt("id"),
+                        rs.getString("isbn"),
+                        rs.getString("titre"),
+                        rs.getString("auteur"),
+                        rs.getString("editeur"),
+                        rs.getString("anneeEdition"),
+                        rs.getInt("numExemplaires"),
+                        rs.getInt("numPages"),
+                        rs.getString("livre_type"),
+                        rs.getString("tome")
+                    );
+                    try{
+                        tempPers = bibliotheque.getPersibByCin(rs.getString("cin_emprunteur"));
+                        tempDoc.set_emprunteur(tempPers);
+                        bibliotheque.ajouterDocument(tempDoc);
+                    } catch (ElementNotFoundException e) {
+                        System.exit(1);
+                    }
+                }
+                case "Magazine":{
+                    tempDoc = new Livre(
+                        rs.getInt("id"),
+                        rs.getString("isbn"),
+                        rs.getString("titre"),
+                        rs.getString("auteur"),
+                        rs.getString("editeur"),
+                        rs.getString("anneeEdition"),
+                        rs.getInt("numExemplaires"),
+                        rs.getInt("periodicity"),
+                        rs.getString("moisEdition"),
+                        rs.getString("jourEdition")
+                    );
+                    try{
+                        tempPers = bibliotheque.getPersibByCin(rs.getString("cin_emprunteur"));
+                        tempDoc.set_emprunteur(tempPers);
+                        bibliotheque.ajouterDocument(tempDoc);
+                    } catch (ElementNotFoundException e) {
+                        System.exit(1);
+                    }
+                }
+            }
+        }
+        ShowAllDocs();
         primaryStage.setOnCloseRequest(e->{
             try {
                 st.close();

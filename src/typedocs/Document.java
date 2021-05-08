@@ -15,10 +15,14 @@ public abstract class Document {
     private int numExemplaires;
     protected String type;
     private Person emprunteur;
+    private int id;
+
+    private static int id_counter;
 
 
 
     // ************** getters and setters:
+    public int get_id(){ return id;}
 
     public Person get_emprunteur(){
         return emprunteur;
@@ -99,6 +103,20 @@ public abstract class Document {
         this.numExemplaires = numExemplaires;
         this.AneEdition = AneEdition;
         this.ISBN = ISBN;
+
+        id = id_counter;
+        id_counter++;
+    }
+    public Document(int id,String ISBN,String titre,String auteurs,String editeur,String AneEdition,int numExemplaires){
+        this.titre = titre;
+        this.auteurs = auteurs;
+        this.editeur = editeur;
+        this.numExemplaires = numExemplaires;
+        this.AneEdition = AneEdition;
+        this.ISBN = ISBN;
+
+        this.id = id;
+        id_counter = id > id_counter ? id : id_counter;
     }
 
 }

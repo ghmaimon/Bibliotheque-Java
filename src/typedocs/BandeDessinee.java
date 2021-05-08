@@ -40,5 +40,11 @@ public class BandeDessinee extends Document{
             this.genre = genre;
             type = "Bande Dessinée";
         }
+        public BandeDessinee(int id,String ISBN,String titre,String auteurs,String editeur,String AneEdition,int numExemplaires,boolean colore,String genre) {
+            super(id,ISBN, titre, auteurs, editeur, AneEdition, numExemplaires);
+            this.coloree = colore;
+            this.genre = genre;
+            type = "Bande Dessinée";
+        }
 
 }

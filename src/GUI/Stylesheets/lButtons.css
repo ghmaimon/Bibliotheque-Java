@@ -56,7 +56,7 @@
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
 }
-#tril{
+.tril{
     -fx-text-alignment:center;
     -fx-min-height : 50;
     -fx-min-width : 100;
@@ -83,6 +83,12 @@
     -fx-background-position: center;
 }
 #desc{
+    -fx-background-image: url(../Images/down.png);
+    -fx-background-size: 20%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+.dbutton{
     -fx-min-height : 50;
     -fx-min-width : 180;
     -fx-padding: 7;
@@ -91,37 +97,23 @@
     -fx-background-radius: 10px;
     -fx-text-alignment:center;
     -fx-background-color : rgba(195, 219, 233, 0.301);
-    -fx-background-image: url(../Images/down.png);
-    -fx-background-size: 20%;
-    -fx-background-repeat: no-repeat;
-    -fx-background-position: center;
+    -fx-font-size:14px;
+    -fx-font-weight: bold;
 }
-
-#desc:hover{
+.dbutton:hover{
     -fx-background-color : rgba(143, 203, 238, 0.651);
     -fx-border-color: rgb(98, 153, 236) ;
     -fx-border-width: 2 ; 
     -fx-border-style: solid ;
     -fx-border-radius : 10px;
 }
-#desc:pressed{
+.dbutton:pressed{
     -fx-background-color : rgba(89, 185, 240, 0.726);
     -fx-border-color: rgba(69, 129, 218, 0.623) ;
     -fx-border-width: 2 ; 
     -fx-border-style: solid ;
     -fx-border-radius : 10px;
 }
-#asc:hover{
-    -fx-background-color : rgba(143, 203, 238, 0.651);
-    -fx-border-color: rgb(98, 153, 236) ;
-    -fx-border-width: 2 ; 
-    -fx-border-style: solid ;
-    -fx-border-radius : 10px;
-}
-#asc:pressed{
-    -fx-background-color : rgba(89, 185, 240, 0.726);
-    -fx-border-color: rgba(69, 129, 218, 0.623) ;
-    -fx-border-width: 2 ; 
-    -fx-border-style: solid ;
-    -fx-border-radius : 10px;
+#tdate{
+    -fx-min-height : 85;
 }

@@ -51,4 +51,11 @@ public class Magazine extends Document {
         this.jourEdition = jour_edition;
         type = "Magazine";
     }
+    public Magazine(int id, String ISBN,String titre,String auteurs,String editeur,String AneEdition,int numExemplaires,int periodicity,int mois_edition,int jour_edition) {
+        super(id, ISBN, titre, auteurs, editeur, AneEdition, numExemplaires);
+        this.periodicity = periodicity;
+        this.moisEdition = mois_edition;
+        this.jourEdition = jour_edition;
+        type = "Magazine";
+    }
 }

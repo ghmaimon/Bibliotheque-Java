@@ -40,4 +40,12 @@ public class Professeur extends Person {
         type = "professeur";
         empruntes = new Document[numEmpruntsMax];
     }
+    public Professeur(int id, String nom, String prenom,int age,String email, String cin,String numTelefone,String address, LocalDate naissance, String cours, int grade){
+        super(id, nom, prenom, age, email, cin, numTelefone, address, naissance);
+        this.numEmpruntsMax = 5;
+        this.grade = grade;
+        this.cours = cours;
+        type = "professeur";
+        empruntes = new Document[numEmpruntsMax];
+    }
 }
